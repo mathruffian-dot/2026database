@@ -8,6 +8,7 @@ Claude基本功 EP09：Supabase 資料庫懶人包的實作工作目錄。
 ## 關鍵時程
 - 影片規劃建立：2026-04-04
 - 專案初始化：2026-04-12
+- 第二台電腦彩排完成：2026-04-12
 
 ## 語言與風格
 - 所有回應、文件皆使用**繁體中文**
@@ -16,29 +17,56 @@ Claude基本功 EP09：Supabase 資料庫懶人包的實作工作目錄。
 ## Obsidian 關聯資料
 以下 Obsidian 筆記可作為佐證素材，路徑相對於 vault 根目錄：
 - `創作庫/Claude基本功EP09 - Supabase資料庫懶人包.md` — EP09 腳本大綱與製作進度
-- `Claude Code 懶人包/04-連接 Supabase 資料庫.md` — Supabase 懶人包 v0.2
+- `Claude Code 懶人包/04-連接 Supabase 資料庫.md` — Supabase 懶人包 v0.3
+
+## Supabase 專案資訊
+- 專案名稱：`my-teaching-tools`
+- 專案 ID：`xxbjykdheracbfmwpxwm`
+- Region：`ap-northeast-2`
+- 資料表：`students`（座號、姓名、國英數、總分、平均）
+- RLS：僅 `mathruffian@gmail.com` 可存取
+- Auth：Google OAuth 登入
+- 網頁：https://mathruffian-dot.github.io/2026database/
 
 ## 目前進度
 - [x] 專案初始化
-- [ ] 連接 Supabase MCP
-- [ ] 建立班級成績記錄資料庫
-- [ ] 製作成績管理前端網頁
-- [ ] 部署到 GitHub Pages
-- [ ] 設定自動防暫停排程
+- [x] 連接 Supabase MCP（PAT 方式）
+- [x] 建立班級成績記錄資料庫
+- [x] 製作成績管理前端網頁
+- [x] 加入 Google 帳號登入 + RLS 保護
+- [x] 部署到 GitHub Pages（公開 repo）
+- [x] 設定自動防暫停排程（每週一 9:00）
 - [ ] 資料備份到 GitHub 排程
-- [ ] 錄影示範
+- [ ] 更新懶人包（v0.3 → v1.0）
+- [ ] 正式錄影（第一台電腦）
 
 ## 最近更動紀錄
 | 日期 | 變更摘要 | GDrive | Obsidian | GitHub |
 |------|----------|--------|----------|--------|
 | 2026-04-12 | 專案初始化 | ✅ | ✅ | ✅ |
+| 2026-04-12 | 完成班級成績記錄本（含 Google 登入） | ✅ | 🔄 | ✅ |
 
 ## 資料夾結構
 ```
 2026database/
-├── CLAUDE.md          # 專案說明
-└── .gitignore         # Git 忽略規則
+├── CLAUDE.md              # 專案說明
+├── .gitignore             # Git 忽略規則
+├── index.html             # 班級成績記錄本（含 Google 登入）
+└── .claude/
+    └── launch.json        # 本地預覽伺服器設定
 ```
+
+## 彩排筆記（懶人包更新用）
+
+以下是這次彩排發現需要更新懶人包的地方：
+
+1. **MCP 安裝方式改變**：不再用 `--supabase-url` + `--supabase-service-role-key`，改用 Personal Access Token（`--access-token`）
+2. **Supabase API Keys 介面改版**：不再叫 `anon key` / `service_role key`，改成 `Publishable key` / `Secret key`
+3. **需要額外步驟**：到 Account → Tokens 產生 PAT
+4. **GitHub Pages 需要公開 repo**：免費方案不支援私有 repo
+5. **建議加入 Google Auth**：保護學生資料安全
+6. **RLS 可以每張表各自設定**：不同表可以有不同權限規則
+7. **supabase-js 變數名不能叫 `supabase`**：會跟 `window.supabase` 衝突，要改名（如 `db`）
 
 ## 三處同步指引
 
@@ -46,7 +74,7 @@ Claude基本功 EP09：Supabase 資料庫懶人包的實作工作目錄。
 |------|-------------|------|
 | Google Drive | `G:\我的雲端硬碟\2026database\` | 主要工作目錄，Claude Code 直接讀寫 |
 | Obsidian | `2026database/` | 第二大腦，佐證素材與草稿撰寫 |
-| GitHub | `mathruffian-dot/2026database` | 版本控制與備份 |
+| GitHub | `mathruffian-dot/2026database` | 版本控制與備份（公開 repo） |
 
 ## 工作注意事項
 - 此資料夾位於 Google 雲端硬碟
