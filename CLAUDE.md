@@ -20,12 +20,20 @@ Claude基本功 EP09：Supabase 資料庫懶人包的實作工作目錄。
 - `Claude Code 懶人包/04-連接 Supabase 資料庫.md` — Supabase 懶人包 v0.3
 
 ## Supabase 專案資訊
-- 專案名稱：`my-teaching-tools`
+
+### my-teaching-tools（成績記錄本）
 - 專案 ID：`xxbjykdheracbfmwpxwm`
 - Region：`ap-northeast-2`
 - 資料表：`students`（座號、國英數、總分、平均）
 - 去識別化：統一使用「座號」，不存學生姓名
 - 網頁：https://mathruffian-dot.github.io/2026database/
+
+### teacherstudy（教學互動工具）
+- 專案 ID：`pwfhkdkkobzkmsbmzldj`
+- Region：`ap-southeast-2`
+- 資料表：`wordcloud_words`（word, created_at）
+- RLS：anon 可讀取 + 可新增，老師用 MCP 管理刪除
+- 網頁：https://mathruffian-dot.github.io/2026database/wordcloud.html
 
 ## 架構決策（彩排後確定）
 
@@ -50,6 +58,7 @@ Claude基本功 EP09：Supabase 資料庫懶人包的實作工作目錄。
 - [x] 部署到 GitHub Pages（公開 repo）
 - [x] 設定自動防暫停排程（每週一 9:00）
 - [x] 架構決策：老師端用 Claude + MCP、去識別化用座號
+- [x] 文字雲互動網頁（wordcloud.html + teacherstudy 專案）
 - [ ] 正式錄影前：移除 Google 登入、改用座號
 - [ ] 更新懶人包（v0.3 → v1.0）
 - [ ] 正式錄影（第一台電腦）
@@ -60,6 +69,7 @@ Claude基本功 EP09：Supabase 資料庫懶人包的實作工作目錄。
 | 2026-04-12 | 專案初始化 | ✅ | ✅ | ✅ |
 | 2026-04-12 | 完成班級成績記錄本（含 Google 登入） | ✅ | ✅ | ✅ |
 | 2026-04-12 | 架構決策：去識別化+座號、老師端用 MCP、Google 登入改選配 | ✅ | ✅ | 🔄 |
+| 2026-04-13 | 新增文字雲互動網頁（teacherstudy 專案） | ✅ | ⬜ | ⬜ |
 
 ## 資料夾結構
 ```
@@ -67,6 +77,7 @@ Claude基本功 EP09：Supabase 資料庫懶人包的實作工作目錄。
 ├── CLAUDE.md              # 專案說明
 ├── .gitignore             # Git 忽略規則
 ├── index.html             # 班級成績記錄本（含 Google 登入）
+├── wordcloud.html         # 文字雲互動網頁（teacherstudy 專案）
 └── .claude/
     └── launch.json        # 本地預覽伺服器設定
 ```
