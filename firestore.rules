@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 文字雲集合：任何人可讀寫（公開互動工具）
+    match /wordcloud_words/{document} {
+      allow read, write: if true;
+    }
+
+    // 其他集合預設禁止存取（白名單模式）
+    // 未來新增工具時，在這裡加上對應的 match 區塊，
+    // 然後執行 npx firebase-tools deploy --only firestore:rules
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
