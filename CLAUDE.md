@@ -1,14 +1,17 @@
-# 2026database — Claude基本功 EP09 實作專案
+# 2026database — Claude基本功 EP09 + EP09.5 實作專案
 
 ## 專案簡介
-Claude基本功 EP09：Supabase 資料庫懶人包的實作工作目錄。
-目標是示範如何用 Claude Code + Supabase 做出一個「班級成績記錄本」網頁工具，
+Claude基本功 EP09 與 EP09.5 的實作工作目錄：
+- **EP09**：Supabase 資料庫懶人包，示範班級成績記錄本
+- **EP09.5**：Firebase 串接免費資料庫，示範即時文字雲
+
 從建資料庫、做前端、到上線，全程對話完成。
 
 ## 關鍵時程
 - 影片規劃建立：2026-04-04
 - 專案初始化：2026-04-12
-- 第二台電腦彩排完成：2026-04-12
+- EP09 第二台電腦彩排完成：2026-04-12
+- EP09.5 Firebase 彩排完成：2026-04-14
 
 ## 語言與風格
 - 所有回應、文件皆使用**繁體中文**
@@ -16,8 +19,10 @@ Claude基本功 EP09：Supabase 資料庫懶人包的實作工作目錄。
 
 ## Obsidian 關聯資料
 以下 Obsidian 筆記可作為佐證素材，路徑相對於 vault 根目錄：
-- `創作庫/Claude基本功EP09 - Supabase資料庫懶人包.md` — EP09 腳本大綱與製作進度
-- `Claude Code 懶人包/04-連接 Supabase 資料庫.md` — Supabase 懶人包 v0.3
+- `創作庫/Claude基本功EP09 - Supabase資料庫懶人包.md` — EP09 腳本
+- `創作庫/Claude基本功EP09.5 - Firebase串接免費資料庫.md` — EP09.5 腳本
+- `Claude Code 懶人包/04-連接 Supabase 資料庫.md` — Supabase 懶人包 v0.4
+- `Claude Code 懶人包/05-連接 Firebase 資料庫.md` — Firebase 懶人包 v0.3
 
 ## Supabase 專案資訊
 
@@ -34,6 +39,16 @@ Claude基本功 EP09：Supabase 資料庫懶人包的實作工作目錄。
 - 資料表：`wordcloud_words`（word, created_at）
 - RLS：anon 可讀取 + 可新增，老師用 MCP 管理刪除
 - 網頁：https://mathruffian-dot.github.io/2026database/wordcloud.html
+
+## Firebase 專案資訊
+
+### my-teaching-tools（Firebase 文字雲，EP09.5）
+- 專案 ID：`my-teaching-tools`
+- Region：`asia-east1` (Taiwan)
+- 集合：`wordcloud_words`（word, created_at）
+- Security Rules：白名單模式，wordcloud_words 公開可讀寫，其他禁止
+- Web App：`1:257256401647:web:9db61fe50e7f22274cc91a`
+- 網頁：https://mathruffian-dot.github.io/2026database/wordcloud-firebase.html
 
 ## 架構決策（彩排後確定）
 
@@ -59,8 +74,11 @@ Claude基本功 EP09：Supabase 資料庫懶人包的實作工作目錄。
 - [x] 設定自動防暫停排程（每週一 9:00）
 - [x] 架構決策：老師端用 Claude + MCP、去識別化用座號
 - [x] 文字雲互動網頁（wordcloud.html + teacherstudy 專案）
+- [x] EP09.5：Firebase MCP 連接（CLI login 方式）
+- [x] EP09.5：Firebase 文字雲實作（wordcloud-firebase.html）
+- [x] EP09.5：Firestore 永久安全規則（白名單模式）
+- [x] EP09.5：懶人包 v0.3 + 腳本完成
 - [ ] 正式錄影前：移除 Google 登入、改用座號
-- [ ] 更新懶人包（v0.3 → v1.0）
 - [ ] 正式錄影（第一台電腦）
 
 ## 最近更動紀錄
@@ -69,7 +87,10 @@ Claude基本功 EP09：Supabase 資料庫懶人包的實作工作目錄。
 | 2026-04-12 | 專案初始化 | ✅ | ✅ | ✅ |
 | 2026-04-12 | 完成班級成績記錄本（含 Google 登入） | ✅ | ✅ | ✅ |
 | 2026-04-12 | 架構決策：去識別化+座號、老師端用 MCP、Google 登入改選配 | ✅ | ✅ | 🔄 |
-| 2026-04-13 | 新增文字雲互動網頁（teacherstudy 專案） | ✅ | ⬜ | ⬜ |
+| 2026-04-13 | 新增文字雲互動網頁（teacherstudy 專案） | ✅ | ✅ | ✅ |
+| 2026-04-13 | 更新懶人包 v0.4→v0.5（文字雲實戰範例） | — | ✅ | — |
+| 2026-04-14 | EP09.5 Firebase 彩排：建專案、連 MCP、文字雲、安全規則 | ✅ | ✅ | ✅ |
+| 2026-04-14 | EP09.5 腳本與 Firebase 懶人包 v0.3 完成 | — | ✅ | — |
 
 ## 資料夾結構
 ```
@@ -77,7 +98,8 @@ Claude基本功 EP09：Supabase 資料庫懶人包的實作工作目錄。
 ├── CLAUDE.md              # 專案說明
 ├── .gitignore             # Git 忽略規則
 ├── index.html             # 班級成績記錄本（含 Google 登入）
-├── wordcloud.html         # 文字雲互動網頁（teacherstudy 專案）
+├── wordcloud.html         # 文字雲互動網頁（Supabase / teacherstudy）
+├── wordcloud-firebase.html # 文字雲互動網頁（Firebase / my-teaching-tools）
 └── .claude/
     └── launch.json        # 本地預覽伺服器設定
 ```
@@ -93,6 +115,15 @@ Claude基本功 EP09：Supabase 資料庫懶人包的實作工作目錄。
 5. **Google Auth 改為選配**：老師端改用 Claude + MCP 直接查資料，不需要登入機制
 6. **RLS 可以每張表各自設定**：不同表可以有不同權限規則
 7. **supabase-js 變數名不能叫 `supabase`**：會跟 `window.supabase` 衝突，要改名（如 `db`）
+
+## EP09.5 Firebase 彩排重點
+
+1. **Firebase MCP 用途不同於 Supabase MCP**：Firebase MCP 主要做專案管理（建 app、查設定、安全規則），**無法直接讀寫 Firestore 資料**
+2. **登入方式**：Firebase CLI 必須在互動式終端執行 `firebase login`，無法在 Claude Code 對話中完成，要請使用者打開 cmd
+3. **Firebase Config 全部可以公開**：apiKey、projectId 設計給前端使用，不算敏感資訊
+4. **Firestore 規則建議白名單模式**：建立資料庫時選「正式版模式」而非「測試模式」（避免 30 天過期），立即設定白名單規則
+5. **`onSnapshot` 是 Firebase 的殺手鐧**：即時更新比 Supabase Realtime 設定更簡單
+6. **老師查資料怎麼辦**：Firebase MCP 無法直接查 Firestore，需透過網頁前端或 Firebase Console 操作（這點 Supabase 比較方便）
 
 ## 三處同步指引
 
