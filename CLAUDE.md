@@ -1,9 +1,21 @@
-# 2026database — Claude基本功 EP09 + EP09.5 實作專案
+# 2026database — Claude基本功 EP09 / EP09.5 / EP10 / EP11 實作專案
+
+> ## 📌 對話開始時請先讀這份「駕駛艙」
+>
+> **進度、最近更動、下一步、踩坑筆記** 全部維護在 Obsidian：
+> `2026database/專案工作流程.md`（vault 根的同名資料夾）
+>
+> 透過 `mcp__obsidian__read_note` 讀取，路徑：`2026database/專案工作流程.md`
+>
+> 本檔（`CLAUDE.md`）只負責**藍圖**：架構決策、技術細節、檔案對應、Do/Don't。
+> 進度類資訊**不要寫進本檔**，避免雙寫漂移。
 
 ## 專案簡介
-Claude基本功 EP09 與 EP09.5 的實作工作目錄：
+Claude基本功 EP09 / EP09.5 / EP10 / EP11 的實作工作目錄：
 - **EP09**：Supabase 資料庫懶人包，示範班級成績記錄本
 - **EP09.5**：Firebase 串接免費資料庫，示範即時文字雲
+- **EP10**：一人一碼教學駕駛艙（Firebase 版）— 程式碼在另一個 repo `mathruffian-dot/math-cockpit`，本 repo 只負責 `firestore.rules`
+- **EP11**：本地 AI 與免費 API（Ollama / Groq / Gemini）— `math-homework.html`
 
 從建資料庫、做前端、到上線，全程對話完成。
 
@@ -112,38 +124,16 @@ Claude基本功 EP09 與 EP09.5 的實作工作目錄：
 | 「Supabase MCP 體驗更直接」 | 🟡 SQL 語法稍簡潔，但 Firebase MCP 同樣能用自然語言完成 |
 | 「必須透過 REST API + curl 查 Firestore」 | ❌ 不用，MCP 直接查 |
 
-## 目前進度
-- [x] 專案初始化
-- [x] 連接 Supabase MCP（PAT 方式）
-- [x] 建立班級成績記錄資料庫
-- [x] 製作成績管理前端網頁
-- [x] 加入 Google 帳號登入 + RLS 保護（彩排測試，正式版改為選配）
-- [x] 部署到 GitHub Pages（公開 repo）
-- [x] 設定自動防暫停排程（每週一 9:00）
-- [x] 架構決策：老師端用 Claude + MCP、去識別化用座號
-- [x] 文字雲互動網頁（wordcloud.html + teacherstudy 專案）
-- [x] EP09.5：Firebase MCP 連接（CLI login 方式）
-- [x] EP09.5：Firebase 文字雲實作（wordcloud-firebase.html）
-- [x] EP09.5：Firestore 永久安全規則（白名單模式）
-- [x] EP09.5：懶人包 v0.3 + 腳本完成
-- [x] **EP09 正式錄影 + 上架（2026-04-13）**：https://youtu.be/aRpZL-CyS7k
-- [ ] EP09.5 正式錄影 + 上架
-- [x] **EP10 MVP 完成（2026-04-14）**：Firebase 版教學駕駛艙、QR Code 通行證、即時儀表板、即時派題（細節見 Obsidian EP10 筆記）
-- [ ] EP10 完整 62 人 + 拖拉題型 + 錄影上架
+## 進度與最近更動紀錄
 
-## 最近更動紀錄
-| 日期 | 變更摘要 | GDrive | Obsidian | GitHub |
-|------|----------|--------|----------|--------|
-| 2026-04-12 | 專案初始化 | ✅ | ✅ | ✅ |
-| 2026-04-12 | 完成班級成績記錄本（含 Google 登入） | ✅ | ✅ | ✅ |
-| 2026-04-12 | 架構決策：去識別化+座號、老師端用 MCP、Google 登入改選配 | ✅ | ✅ | 🔄 |
-| 2026-04-13 | 新增文字雲互動網頁（teacherstudy 專案） | ✅ | ✅ | ✅ |
-| 2026-04-13 | 更新懶人包 v0.4→v0.5（文字雲實戰範例） | — | ✅ | — |
-| 2026-04-14 | EP09.5 Firebase 彩排：建專案、連 MCP、文字雲、安全規則 | ✅ | ✅ | ✅ |
-| 2026-04-14 | EP09.5 腳本與 Firebase 懶人包 v0.3 完成 | — | ✅ | — |
-| 2026-04-13 | **EP09 正式錄影 + 上架 YouTube** | — | ✅ | — |
-| 2026-04-14 | EP10 MVP：Firebase 版教學駕駛艙連線版（math-cockpit repo） | — | ✅ | ✅ |
-| 2026-04-14 | firestore.rules：加入 EP10 三 collection 規則 | ✅ | — | 🔄 |
+> 🔥 **不在本檔**。請開 Obsidian `2026database/專案工作流程.md`（駕駛艙）查看：
+> - 上次做到哪
+> - 下一步要做什麼
+> - 待辦 / 卡點
+> - 最近更動紀錄
+> - 踩坑筆記
+>
+> 為了避免雙寫漂移，本檔不再維護進度資訊。
 
 ## 資料夾結構
 ```
@@ -186,12 +176,15 @@ Claude基本功 EP09 與 EP09.5 的實作工作目錄：
 
 ## EP09.5 Firebase 彩排重點
 
-1. **Firebase MCP 用途不同於 Supabase MCP**：Firebase MCP 主要做專案管理（建 app、查設定、安全規則），**無法直接讀寫 Firestore 資料**
+1. **Firebase MCP 完整支援 Firestore CRUD**：`firestore_list_collections` / `firestore_query_collection` / `firestore_get_document` / `firestore_add_document` / `firestore_update_document` / `firestore_delete_document` / `firestore_list_documents` 都有，跟 Supabase MCP 體驗一致。也包含 auth、messaging、storage、remoteconfig 等管理工具。
 2. **登入方式**：Firebase CLI 必須在互動式終端執行 `firebase login`，無法在 Claude Code 對話中完成，要請使用者打開 cmd
 3. **Firebase Config 全部可以公開**：apiKey、projectId 設計給前端使用，不算敏感資訊
 4. **Firestore 規則建議白名單模式**：建立資料庫時選「正式版模式」而非「測試模式」（避免 30 天過期），立即設定白名單規則
 5. **`onSnapshot` 是 Firebase 的殺手鐧**：即時更新比 Supabase Realtime 設定更簡單
-6. **老師查資料怎麼辦**：Firebase MCP 無法直接查 Firestore，需透過網頁前端或 Firebase Console 操作（這點 Supabase 比較方便）
+6. **老師查資料**：對 Claude 自然語言說「查 wordcloud_words 有幾筆、列出最熱門的 5 個關鍵字」，Claude 會直接呼叫 `firestore_query_collection` 撈資料整理回報，跟 Supabase 體驗一樣直接。
+7. **`firestore_query_collection` 的 `collection_path` 不要含尾巴 `/`**：寫成 `quiz_responses` 而非 `quiz_responses/`，否則會報「Collection id is invalid because it contains /」。
+
+> ⚠️ 修正紀錄（2026-04-14）：第 1 與第 6 點原本寫「Firebase MCP 無法直接讀寫 Firestore」是錯的——當時誤以為 MCP 只做專案管理。EP10 MVP 實作過程已完整驗證 Firebase MCP 的 Firestore CRUD 工具全部能用。
 
 ## 三處同步指引
 
