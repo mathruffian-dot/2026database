@@ -12,6 +12,35 @@ service cloud.firestore {
       allow read, write: if true;
     }
 
+    // ───────── EP10：一人一碼教學駕駛艙（Firebase 版） ─────────
+    // student_tokens：學生通行證
+    //   - 允許用 doc id（token）直查單筆（學生掃 QR Code 後查自己的座號）
+    //   - 不允許 list 整個集合（避免被列舉）
+    //   - 寫入由老師端 MCP 直接操作（前端不能寫）
+    match /student_tokens/{token} {
+      // get：學生掃 QR Code 後用 doc id 直查自己的座號
+      // list：老師儀表板要列出全班（只存座號不存姓名，非個資）
+      // write：禁止前端寫入，只允許老師端透過 Firebase MCP 種入
+      allow get, list: if true;
+      allow write: if false;
+    }
+
+    // quiz_assignments：老師派題
+    //   - 公開可讀（學生 onSnapshot 訂閱 active 派題）
+    //   - 寫入由老師端操作（MVP 階段先開放公開寫，正式版可改為密碼或自訂 claims）
+    match /quiz_assignments/{document} {
+      allow read, write: if true;
+    }
+
+    // quiz_responses：學生作答紀錄
+    //   - 只能 create（不能改別人的、不能刪）
+    //   - 讀取由老師端操作（MVP 階段公開讀，方便儀表板統計）
+    match /quiz_responses/{document} {
+      allow read, create: if true;
+      allow update, delete: if false;
+    }
+    // ────────────────────────────────────────────────────
+
     // 其他集合預設禁止存取（白名單模式）
     // 未來新增工具時，在這裡加上對應的 match 區塊，
     // 然後執行 npx firebase-tools deploy --only firestore:rules
