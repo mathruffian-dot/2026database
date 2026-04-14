@@ -7,6 +7,11 @@ service cloud.firestore {
       allow read, write: if true;
     }
 
+    // 數學作業批改集合：學生可寫入自己的作答，任何人可讀（老師 + 學生本人看）
+    match /math_homework/{document} {
+      allow read, write: if true;
+    }
+
     // 其他集合預設禁止存取（白名單模式）
     // 未來新增工具時，在這裡加上對應的 match 區塊，
     // 然後執行 npx firebase-tools deploy --only firestore:rules
