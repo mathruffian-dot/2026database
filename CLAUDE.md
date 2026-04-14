@@ -38,6 +38,16 @@ Claude基本功 EP09 / EP09.5 / EP10 / EP11 的實作工作目錄：
 - `Claude Code 懶人包/04-連接 Supabase 資料庫.md` — Supabase 懶人包 v0.4
 - `Claude Code 懶人包/05-連接 Firebase 資料庫.md` — Firebase 懶人包 v0.7
 
+## 附屬 GDrive 工作目錄
+
+本邏輯專案除了本資料夾之外，還會動到下列 GDrive 路徑：
+
+| 路徑 | 角色 | Git |
+|------|------|-----|
+| `G:\我的雲端硬碟\2026數學715\` | 教材 PDF 儲存 + 班上實際使用版本（去識別化、不上 git） | ❌ |
+
+> 完整關係圖請看 Obsidian 駕駛艙的「🛠️ 此邏輯專案會動到的東西」區塊。
+
 ## Supabase 專案資訊
 
 ### my-teaching-tools（成績記錄本）
