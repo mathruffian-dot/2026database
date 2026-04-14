@@ -128,6 +128,8 @@ Claude基本功 EP09 與 EP09.5 的實作工作目錄：
 - [x] EP09.5：懶人包 v0.3 + 腳本完成
 - [x] **EP09 正式錄影 + 上架（2026-04-13）**：https://youtu.be/aRpZL-CyS7k
 - [ ] EP09.5 正式錄影 + 上架
+- [x] **EP10 MVP 完成（2026-04-14）**：Firebase 版教學駕駛艙、QR Code 通行證、即時儀表板、即時派題（細節見 Obsidian EP10 筆記）
+- [ ] EP10 完整 62 人 + 拖拉題型 + 錄影上架
 
 ## 最近更動紀錄
 | 日期 | 變更摘要 | GDrive | Obsidian | GitHub |
@@ -140,6 +142,8 @@ Claude基本功 EP09 與 EP09.5 的實作工作目錄：
 | 2026-04-14 | EP09.5 Firebase 彩排：建專案、連 MCP、文字雲、安全規則 | ✅ | ✅ | ✅ |
 | 2026-04-14 | EP09.5 腳本與 Firebase 懶人包 v0.3 完成 | — | ✅ | — |
 | 2026-04-13 | **EP09 正式錄影 + 上架 YouTube** | — | ✅ | — |
+| 2026-04-14 | EP10 MVP：Firebase 版教學駕駛艙連線版（math-cockpit repo） | — | ✅ | ✅ |
+| 2026-04-14 | firestore.rules：加入 EP10 三 collection 規則 | ✅ | — | 🔄 |
 
 ## 資料夾結構
 ```
@@ -165,6 +169,7 @@ Claude基本功 EP09 與 EP09.5 的實作工作目錄：
 |------|------|---------|
 | EP09 | Supabase 資料庫懶人包 | `index.html`、`wordcloud.html` |
 | EP09.5 | Firebase 串接免費資料庫 | `wordcloud-firebase.html`、`firestore.rules`、`firebase.json` |
+| EP10 | 一人一碼教學駕駛艙（Firebase 版）| 在另一個 repo `mathruffian-dot/math-cockpit`：`2-2-linear-equation-graph/index.html`（改造）、`qr-generator.html`、`teacher-dashboard.html`；本 repo 只負責 `firestore.rules` 對應段落 |
 | EP11 | 本地 AI 與免費 API（Ollama/Groq/Gemini） | `math-homework.html` |
 
 ## 彩排筆記（懶人包更新用）
