@@ -79,11 +79,11 @@ Claude基本功 EP09 與 EP09.5 的實作工作目錄：
 - ✅ `onSnapshot` 即時更新更簡單
 - ✅ **永遠不會閒置暫停**（不用設排程）
 - ✅ **無限免費專案**（Spark 方案）
-- ✅ Claude 可用 REST API + curl 自然語言查資料
+- ✅ **Firebase MCP 完整支援 Firestore CRUD**（list、query、add、update、delete、auth、messaging、storage 都有）
+- ✅ Claude 用自然語言直接操作資料，跟 Supabase MCP 體驗一致
 
 ### Supabase（適合：重度資料分析需求）
-- ✅ 老師用 MCP `execute_sql` 直接查資料（體驗最直接）
-- ✅ 複雜 SQL 統計（JOIN、GROUP BY、跨表分析）
+- ✅ 複雜 SQL 統計（JOIN、GROUP BY、跨表分析）一行搞定
 - ✅ 學期累積成績匯總、跨單元交叉分析
 - ⚠️ 免費版並發連線上限 200 → 不適合大型研習
 - ⚠️ 免費版只能建 2 個專案
@@ -104,11 +104,12 @@ Claude基本功 EP09 與 EP09.5 的實作工作目錄：
 
 ### 為什麼從「Supabase 為主」改為「Firebase 為主」？
 
-| 之前的疑慮 | 重新評估 |
+| 之前的疑慮 | 2026-04-14 重新驗證 |
 |-----------|---------|
-| 「Firebase 不能用 Claude 查資料」 | ❌ 錯了，REST API + curl 可以做到 |
-| 「Firebase MCP 工具少」 | ✅ 工具少，但不影響資料查詢需求 |
-| 「Supabase MCP 體驗更直接」 | ✅ 是的，但只有重度分析才用得到 |
+| 「Firebase 不能用 Claude 查資料」 | ❌ 完全錯誤，Firebase MCP 有完整 Firestore CRUD 工具 |
+| 「Firebase MCP 工具少」 | ❌ 錯，有 list/query/add/update/delete + auth + messaging + storage |
+| 「Supabase MCP 體驗更直接」 | 🟡 SQL 語法稍簡潔，但 Firebase MCP 同樣能用自然語言完成 |
+| 「必須透過 REST API + curl 查 Firestore」 | ❌ 不用，MCP 直接查 |
 
 ## 目前進度
 - [x] 專案初始化
