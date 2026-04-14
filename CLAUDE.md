@@ -20,10 +20,11 @@ Claude基本功 EP09 與 EP09.5 的實作工作目錄：
 
 ## Obsidian 關聯資料
 以下 Obsidian 筆記可作為佐證素材，路徑相對於 vault 根目錄：
-- `創作庫/Claude基本功EP09 - Supabase資料庫懶人包.md` — EP09 腳本
+- `創作庫/Claude基本功EP09 - Supabase資料庫懶人包.md` — EP09 腳本（已發布）
 - `創作庫/Claude基本功EP09.5 - Firebase串接免費資料庫.md` — EP09.5 腳本
+- `創作庫/Claude基本功EP11 - 本地AI與免費API懶人包.md` — EP11 腳本（含 Groq + Vision）
 - `Claude Code 懶人包/04-連接 Supabase 資料庫.md` — Supabase 懶人包 v0.4
-- `Claude Code 懶人包/05-連接 Firebase 資料庫.md` — Firebase 懶人包 v0.3
+- `Claude Code 懶人包/05-連接 Firebase 資料庫.md` — Firebase 懶人包 v0.7
 
 ## Supabase 專案資訊
 
@@ -143,14 +144,28 @@ Claude基本功 EP09 與 EP09.5 的實作工作目錄：
 ## 資料夾結構
 ```
 2026database/
-├── CLAUDE.md              # 專案說明
-├── .gitignore             # Git 忽略規則
-├── index.html             # 班級成績記錄本（含 Google 登入）
-├── wordcloud.html         # 文字雲互動網頁（Supabase / teacherstudy）
-├── wordcloud-firebase.html # 文字雲互動網頁（Firebase / my-teaching-tools）
+├── CLAUDE.md                   # 專案說明
+├── .gitignore                  # Git 忽略規則
+├── firebase.json               # Firebase CLI 設定（EP09.5）
+├── firestore.rules             # Firestore 安全規則（EP09.5）
+├── .firebaserc                 # Firebase 專案設定（EP09.5）
+│
+├── index.html                  # 班級成績記錄本（EP09，Supabase）
+├── wordcloud.html              # 文字雲互動網頁（EP09，Supabase）
+├── wordcloud-firebase.html     # 文字雲互動網頁（EP09.5，Firebase）
+├── math-homework.html          # 數學作業 AI 批改（EP11，Groq Vision + Firebase）
+│
 └── .claude/
-    └── launch.json        # 本地預覽伺服器設定
+    └── launch.json             # 本地預覽伺服器設定
 ```
+
+## 檔案對應集數
+
+| 集數 | 主題 | 示範檔案 |
+|------|------|---------|
+| EP09 | Supabase 資料庫懶人包 | `index.html`、`wordcloud.html` |
+| EP09.5 | Firebase 串接免費資料庫 | `wordcloud-firebase.html`、`firestore.rules`、`firebase.json` |
+| EP11 | 本地 AI 與免費 API（Ollama/Groq/Gemini） | `math-homework.html` |
 
 ## 彩排筆記（懶人包更新用）
 
