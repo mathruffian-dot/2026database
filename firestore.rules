@@ -41,6 +41,41 @@ service cloud.firestore {
     }
     // ────────────────────────────────────────────────────
 
+    // ───────── 老師場景示範（Pre-EP10）─────────
+    // game_scores：速算排行榜
+    //   - 任何人可讀（排行榜公開顯示）
+    //   - 任何人可 create（學生上傳分數）
+    //   - 禁止修改 / 刪除
+    match /game_scores/{document} {
+      allow read, create: if true;
+      allow update, delete: if false;
+    }
+
+    // irs_session：IRS 當前題目（老師寫入，學生訂閱）
+    //   - 任何人可讀寫（MVP 階段；正式版可加密碼限制老師寫入）
+    match /irs_session/{document} {
+      allow read, write: if true;
+    }
+
+    // irs_responses：IRS 學生回應
+    //   - 任何人可讀（老師統計圖）
+    //   - 任何人可 create（學生送答）
+    //   - 禁止修改 / 刪除
+    match /irs_responses/{document} {
+      allow read, create: if true;
+      allow update, delete: if false;
+    }
+
+    // formative_responses：形成性評量作答紀錄
+    //   - 任何人可讀（老師儀表板 + Claude MCP 查詢）
+    //   - 任何人可 create（學生送出）
+    //   - 禁止修改 / 刪除
+    match /formative_responses/{document} {
+      allow read, create: if true;
+      allow update, delete: if false;
+    }
+    // ────────────────────────────────────────────
+
     // 其他集合預設禁止存取（白名單模式）
     // 未來新增工具時，在這裡加上對應的 match 區塊，
     // 然後執行 npx firebase-tools deploy --only firestore:rules
