@@ -97,7 +97,7 @@ Claude基本功 EP09 / EP09.5 / EP10 / EP11 的實作工作目錄：
 
 ### Firebase（推薦：絕大多數老師的預設選擇）
 - ✅ 班級教學工具（成績、回饋、互動）
-- ✅ 大型研習 IRS（並發 100 萬，Spark 免費版）
+- ✅ 大型研習 IRS（Realtime Database 並發 100 萬；若用 Firestore 需注意每日 50k reads 上限，設計 onSnapshot 結構時要留意）
 - ✅ 即時文字雲、投票、舉手
 - ✅ `onSnapshot` 即時更新更簡單
 - ✅ **永遠不會閒置暫停**（不用設排程）
@@ -120,7 +120,7 @@ Claude基本功 EP09 / EP09.5 / EP10 / EP11 的實作工作目錄：
 | 班級成績記錄本 | 30 人 | **Firebase** | 不會暫停，老師也能用 Claude 查 |
 | 課堂 IRS、即時互動 | 30 人 | **Firebase** | onSnapshot 即時更新最簡單 |
 | 即時文字雲、投票牆 | 不限 | **Firebase** | onSnapshot 即時更新 |
-| **大型研習 IRS** | **1000 人** | **Firebase**（必選） | 並發 100 萬 vs Supabase 200 |
+| **大型研習 IRS** | **1000 人** | **Firebase**（必選） | Realtime DB 並發 100 萬 vs Supabase 200；用 Firestore 時注意 50k reads/天 |
 | 教學駕駛艙 + 差異化派題 | 30 人 | Supabase | 複雜 SQL 統計查詢 |
 | 學期成績匯總、跨單元分析 | — | Supabase | SQL JOIN/GROUP BY 強 |
 | 已經用 Supabase 的人 | — | 繼續用 | 沒必要換 |
