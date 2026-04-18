@@ -148,10 +148,11 @@ Claude基本功 EP09 / EP09.5 / EP10 / EP11 的實作工作目錄：
 ## 資料夾結構
 ```
 2026database/
-├── CLAUDE.md                   # 專案說明
+├── CLAUDE.md                   # 專案說明（藍圖）
 ├── .gitignore                  # Git 忽略規則
+│
 ├── firebase.json               # Firebase CLI 設定（EP09.5）
-├── firestore.rules             # Firestore 安全規則（EP09.5）
+├── firestore.rules             # Firestore 安全規則（EP09.5 + EP10）
 ├── .firebaserc                 # Firebase 專案設定（EP09.5）
 │
 ├── index.html                  # 班級成績記錄本（EP09，Supabase）
@@ -159,9 +160,29 @@ Claude基本功 EP09 / EP09.5 / EP10 / EP11 的實作工作目錄：
 ├── wordcloud-firebase.html     # 文字雲互動網頁（EP09.5，Firebase）
 ├── math-homework.html          # 數學作業 AI 批改（EP11，Groq Vision + Firebase）
 │
+├── 老師建專案指南.md            # 給觀眾的初學者建專案手冊（v2.1, 948 行）
+├── 老師建專案指南-懶人包.md     # 可自客製化範本（內含 meta-prompt）
+│
 └── .claude/
     └── launch.json             # 本地預覽伺服器設定
 ```
+
+## 重要檔案速查表（給 AI 快速 onboarding 用）
+
+| 檔案 | 一句話用途 | 改動頻率 | 對應集數／工作 |
+|------|----------|---------|--------------|
+| `CLAUDE.md`（本檔） | **藍圖**：架構決策、技術細節、Do/Don't | 慢（變動會破 prompt cache） | 全系列 |
+| `firestore.rules` | Firestore 三 collection 白名單規則 | 中（新工具上線時加） | EP09.5 + EP10 |
+| `index.html` | 班級成績本前端 | 低（已上線） | EP09 |
+| `wordcloud.html` | 文字雲（Supabase 版） | 低（已上線） | EP09 |
+| `wordcloud-firebase.html` | 文字雲（Firebase 版，**對外推薦**） | 低（已上線） | EP09.5 |
+| `math-homework.html` | 拍照→Groq Vision→Firebase | 中（EP11 開發中） | EP11 |
+| `老師建專案指南.md` | 給觀眾的建專案完整手冊 | 中（持續補強） | EP14 候選 |
+| `老師建專案指南-懶人包.md` | 可自客製化範本（內含 meta-prompt） | 低 | EP14 候選 |
+
+**EP10 主要程式碼不在本 repo**，在 [`mathruffian-dot/math-cockpit`](https://github.com/mathruffian-dot/math-cockpit)（`2-2-linear-equation-graph/index.html`、`qr-generator.html`、`teacher-dashboard.html`）。本 repo 只負責 EP10 對應的 `firestore.rules` 段落。
+
+> 💡 **想知道某檔案最近改了什麼？** 看 Obsidian 駕駛艙 `2026database/專案工作流程.md` 的「最近更動紀錄」表格。
 
 ## 檔案對應集數
 
