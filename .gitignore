@@ -15,3 +15,6 @@ package-lock.json
 # 大型二進位檔（選擇性排除）
 # *.mp4
 # *.zip
+
+# Claude Code 本地設定（含 permissions、可能含 token，絕不上雲）
+.claude/
