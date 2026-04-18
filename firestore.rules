@@ -12,7 +12,7 @@ service cloud.firestore {
       allow read, write: if true;
     }
 
-    // ───────── EP10：一人一碼教學駕駛艙（Firebase 版） ─────────
+    // ───────── EP11：一人一碼教學駕駛艙（Firebase 版） ─────────
     // student_tokens：學生通行證
     //   - 允許用 doc id（token）直查單筆（學生掃 QR Code 後查自己的座號）
     //   - 不允許 list 整個集合（避免被列舉）
@@ -41,7 +41,7 @@ service cloud.firestore {
     }
     // ────────────────────────────────────────────────────
 
-    // ───────── 老師場景示範（Pre-EP10）─────────
+    // ───────── 老師場景示範（Pre-EP11）─────────
     // game_scores：速算排行榜
     //   - 任何人可讀（排行榜公開顯示）
     //   - 任何人可 create（學生上傳分數）

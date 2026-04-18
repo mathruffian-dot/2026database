@@ -1,4 +1,4 @@
-# 2026database — Claude基本功 EP09 / EP09.5 / EP10 / EP11 實作專案
+# 2026database — Claude基本功 EP09 / EP09.5 / EP11 / EP12 實作專案
 
 > ## 📌 對話開始時請先讀這份「駕駛艙」
 >
@@ -11,11 +11,11 @@
 > 進度類資訊**不要寫進本檔**，避免雙寫漂移。
 
 ## 專案簡介
-Claude基本功 EP09 / EP09.5 / EP10 / EP11 的實作工作目錄：
+Claude基本功 EP09 / EP09.5 / EP11 / EP12 的實作工作目錄：
 - **EP09**：Supabase 資料庫懶人包，示範班級成績記錄本
 - **EP09.5**：Firebase 串接免費資料庫，示範即時文字雲
-- **EP10**：一人一碼教學駕駛艙（Firebase 版）— 程式碼在另一個 repo `mathruffian-dot/math-cockpit`，本 repo 只負責 `firestore.rules`
-- **EP11**：本地 AI 與免費 API（Ollama / Groq / Gemini）— `math-homework.html`
+- **EP11**：一人一碼教學駕駛艙（Firebase 版）— 程式碼在另一個 repo `mathruffian-dot/math-cockpit`，本 repo 只負責 `firestore.rules`
+- **EP12**：本地 AI 與免費 API（Ollama / Groq / Gemini）— `math-homework.html`
 
 從建資料庫、做前端、到上線，全程對話完成。
 
@@ -34,7 +34,7 @@ Claude基本功 EP09 / EP09.5 / EP10 / EP11 的實作工作目錄：
 以下 Obsidian 筆記可作為佐證素材，路徑相對於 vault 根目錄：
 - `創作庫/Claude基本功EP09 - Supabase資料庫懶人包.md` — EP09 腳本（已發布）
 - `創作庫/Claude基本功EP09.5 - Firebase串接免費資料庫.md` — EP09.5 腳本
-- `創作庫/Claude基本功EP11 - 本地AI與免費API懶人包.md` — EP11 腳本（含 Groq + Vision）
+- `創作庫/Claude基本功EP12 - 本地AI與免費API懶人包.md` — EP12 腳本（含 Groq + Vision）
 - `Claude Code 懶人包/04-連接 Supabase 資料庫.md` — Supabase 懶人包 v0.4
 - `Claude Code 懶人包/05-連接 Firebase 資料庫.md` — Firebase 懶人包 v0.7
 
@@ -152,16 +152,16 @@ Claude基本功 EP09 / EP09.5 / EP10 / EP11 的實作工作目錄：
 ├── .gitignore                  # Git 忽略規則
 │
 ├── firebase.json               # Firebase CLI 設定（EP09.5）
-├── firestore.rules             # Firestore 安全規則（EP09.5 + EP10）
+├── firestore.rules             # Firestore 安全規則（EP09.5 + EP11）
 ├── .firebaserc                 # Firebase 專案設定（EP09.5）
 │
 ├── index.html                  # 班級成績記錄本（EP09，Supabase）
 ├── wordcloud.html              # 文字雲互動網頁（EP09，Supabase）
 ├── wordcloud-firebase.html     # 文字雲互動網頁（EP09.5，Firebase）
-├── math-homework.html          # 數學作業 AI 批改（EP11，Groq Vision + Firebase）
+├── math-homework.html          # 數學作業 AI 批改（EP12，Groq Vision + Firebase）
 │
 ├── 老師建專案指南.md            # 給觀眾的初學者建專案手冊（v2.1, 948 行）
-├── 老師建專案指南-懶人包.md     # 可自客製化範本（內含 meta-prompt）
+├── EP10-老師建專案指南懶人包.md     # 可自客製化範本（內含 meta-prompt）
 │
 └── .claude/
     └── launch.json             # 本地預覽伺服器設定
@@ -172,15 +172,15 @@ Claude基本功 EP09 / EP09.5 / EP10 / EP11 的實作工作目錄：
 | 檔案 | 一句話用途 | 改動頻率 | 對應集數／工作 |
 |------|----------|---------|--------------|
 | `CLAUDE.md`（本檔） | **藍圖**：架構決策、技術細節、Do/Don't | 慢（變動會破 prompt cache） | 全系列 |
-| `firestore.rules` | Firestore 三 collection 白名單規則 | 中（新工具上線時加） | EP09.5 + EP10 |
+| `firestore.rules` | Firestore 三 collection 白名單規則 | 中（新工具上線時加） | EP09.5 + EP11 |
 | `index.html` | 班級成績本前端 | 低（已上線） | EP09 |
 | `wordcloud.html` | 文字雲（Supabase 版） | 低（已上線） | EP09 |
 | `wordcloud-firebase.html` | 文字雲（Firebase 版，**對外推薦**） | 低（已上線） | EP09.5 |
-| `math-homework.html` | 拍照→Groq Vision→Firebase | 中（EP11 開發中） | EP11 |
-| `老師建專案指南.md` | 給觀眾的建專案完整手冊 | 中（持續補強） | EP14 候選 |
-| `老師建專案指南-懶人包.md` | 可自客製化範本（內含 meta-prompt） | 低 | EP14 候選 |
+| `math-homework.html` | 拍照→Groq Vision→Firebase | 中（EP12 開發中） | EP12 |
+| `老師建專案指南.md` | 給觀眾的建專案完整手冊 | 中（持續補強） | EP10 |
+| `EP10-老師建專案指南懶人包.md` | 可自客製化範本（內含 meta-prompt） | 低 | EP10 |
 
-**EP10 主要程式碼不在本 repo**，在 [`mathruffian-dot/math-cockpit`](https://github.com/mathruffian-dot/math-cockpit)（`2-2-linear-equation-graph/index.html`、`qr-generator.html`、`teacher-dashboard.html`）。本 repo 只負責 EP10 對應的 `firestore.rules` 段落。
+**EP11 主要程式碼不在本 repo**，在 [`mathruffian-dot/math-cockpit`](https://github.com/mathruffian-dot/math-cockpit)（`2-2-linear-equation-graph/index.html`、`qr-generator.html`、`teacher-dashboard.html`）。本 repo 只負責 EP11 對應的 `firestore.rules` 段落。
 
 > 💡 **想知道某檔案最近改了什麼？** 看 Obsidian 駕駛艙 `2026database/專案工作流程.md` 的「最近更動紀錄」表格。
 
@@ -190,8 +190,8 @@ Claude基本功 EP09 / EP09.5 / EP10 / EP11 的實作工作目錄：
 |------|------|---------|
 | EP09 | Supabase 資料庫懶人包 | `index.html`、`wordcloud.html` |
 | EP09.5 | Firebase 串接免費資料庫 | `wordcloud-firebase.html`、`firestore.rules`、`firebase.json` |
-| EP10 | 一人一碼教學駕駛艙（Firebase 版）| 在另一個 repo `mathruffian-dot/math-cockpit`：`2-2-linear-equation-graph/index.html`（改造）、`qr-generator.html`、`teacher-dashboard.html`；本 repo 只負責 `firestore.rules` 對應段落 |
-| EP11 | 本地 AI 與免費 API（Ollama/Groq/Gemini） | `math-homework.html` |
+| EP11 | 一人一碼教學駕駛艙（Firebase 版）| 在另一個 repo `mathruffian-dot/math-cockpit`：`2-2-linear-equation-graph/index.html`（改造）、`qr-generator.html`、`teacher-dashboard.html`；本 repo 只負責 `firestore.rules` 對應段落 |
+| EP12 | 本地 AI 與免費 API（Ollama/Groq/Gemini） | `math-homework.html` |
 
 ## 彩排筆記（懶人包更新用）
 
@@ -215,7 +215,7 @@ Claude基本功 EP09 / EP09.5 / EP10 / EP11 的實作工作目錄：
 6. **老師查資料**：對 Claude 自然語言說「查 wordcloud_words 有幾筆、列出最熱門的 5 個關鍵字」，Claude 會直接呼叫 `firestore_query_collection` 撈資料整理回報，跟 Supabase 體驗一樣直接。
 7. **`firestore_query_collection` 的 `collection_path` 不要含尾巴 `/`**：寫成 `quiz_responses` 而非 `quiz_responses/`，否則會報「Collection id is invalid because it contains /」。
 
-> ⚠️ 修正紀錄（2026-04-14）：第 1 與第 6 點原本寫「Firebase MCP 無法直接讀寫 Firestore」是錯的——當時誤以為 MCP 只做專案管理。EP10 MVP 實作過程已完整驗證 Firebase MCP 的 Firestore CRUD 工具全部能用。
+> ⚠️ 修正紀錄（2026-04-14）：第 1 與第 6 點原本寫「Firebase MCP 無法直接讀寫 Firestore」是錯的——當時誤以為 MCP 只做專案管理。EP11 MVP 實作過程已完整驗證 Firebase MCP 的 Firestore CRUD 工具全部能用。
 
 ## 三處同步指引
 

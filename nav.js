@@ -7,7 +7,7 @@
         { href: '/game-leaderboard.html',   label: '遊戲排行榜',  icon: '🏆', ep: 'Pre-10' },
         { href: '/classroom-irs.html',      label: 'IRS互動',    icon: '📡', ep: 'Pre-10' },
         { href: '/formative-quiz.html',     label: '形成性評量',  icon: '📝', ep: 'Pre-10' },
-        { href: '/math-homework.html',      label: 'AI批改作業',  icon: '🤖', ep: 'EP11' },
+        { href: '/math-homework.html',      label: 'AI批改作業',  icon: '🤖', ep: 'EP12' },
     ];
 
     const current = location.pathname;
