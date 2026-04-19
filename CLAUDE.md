@@ -90,49 +90,14 @@ Claude基本功 EP09 / EP09.5 / EP11 / EP12 的實作工作目錄：
 
 ## 平台分工指引（Supabase vs Firebase）
 
-**🔥 使用者決定（2026-04-14）：真實使用以 Firebase 為主**
+**🔥 預設選 Firebase**（2026-04-14 決定）。
 
-> 當使用者要做新的資料庫工具時，預設用 Firebase。除非是複雜 SQL 統計需求才考慮 Supabase。
-> 已有的 Supabase 專案（成績本、文字雲）保留，不主動遷移。
+- **絕大多數老師（班級工具 / 千人研習 / 即時互動）→ Firebase**
+  不暫停、無限免費專案、Realtime DB 並發 100 萬 / Firestore Spark 50k reads/天
+- **重度 SQL 統計（成績匯總、跨單元交叉分析）→ Supabase**
+- **已在用 Supabase 的舊專案** → 繼續用，不主動遷移
 
-### Firebase（推薦：絕大多數老師的預設選擇）
-- ✅ 班級教學工具（成績、回饋、互動）
-- ✅ 大型研習 IRS（Realtime Database 並發 100 萬；若用 Firestore 需注意每日 50k reads 上限，設計 onSnapshot 結構時要留意）
-- ✅ 即時文字雲、投票、舉手
-- ✅ `onSnapshot` 即時更新更簡單
-- ✅ **永遠不會閒置暫停**（不用設排程）
-- ✅ **無限免費專案**（Spark 方案）
-- ✅ **Firebase MCP 完整支援 Firestore CRUD**（list、query、add、update、delete、auth、messaging、storage 都有）
-- ✅ Claude 用自然語言直接操作資料，跟 Supabase MCP 體驗一致
-
-### Supabase（適合：重度資料分析需求）
-- ✅ 複雜 SQL 統計（JOIN、GROUP BY、跨表分析）一行搞定
-- ✅ 學期累積成績匯總、跨單元交叉分析
-- ⚠️ 免費版並發連線上限 200 → 不適合大型研習
-- ⚠️ 免費版只能建 2 個專案
-- ⚠️ 一週閒置會自動暫停（要設排程）
-
-### 場景對照表
-
-| 場景 | 規模 | 推薦 | 原因 |
-|------|------|------|------|
-| 第一次接觸資料庫的老師 | — | **Firebase** | 限制少、不會暫停、規模彈性大 |
-| 班級成績記錄本 | 30 人 | **Firebase** | 不會暫停，老師也能用 Claude 查 |
-| 課堂 IRS、即時互動 | 30 人 | **Firebase** | onSnapshot 即時更新最簡單 |
-| 即時文字雲、投票牆 | 不限 | **Firebase** | onSnapshot 即時更新 |
-| **大型研習 IRS** | **1000 人** | **Firebase**（必選） | Realtime DB 並發 100 萬 vs Supabase 200；用 Firestore 時注意 50k reads/天 |
-| 教學駕駛艙 + 差異化派題 | 30 人 | Supabase | 複雜 SQL 統計查詢 |
-| 學期成績匯總、跨單元分析 | — | Supabase | SQL JOIN/GROUP BY 強 |
-| 已經用 Supabase 的人 | — | 繼續用 | 沒必要換 |
-
-### 為什麼從「Supabase 為主」改為「Firebase 為主」？
-
-| 之前的疑慮 | 2026-04-14 重新驗證 |
-|-----------|---------|
-| 「Firebase 不能用 Claude 查資料」 | ❌ 完全錯誤，Firebase MCP 有完整 Firestore CRUD 工具 |
-| 「Firebase MCP 工具少」 | ❌ 錯，有 list/query/add/update/delete + auth + messaging + storage |
-| 「Supabase MCP 體驗更直接」 | 🟡 SQL 語法稍簡潔，但 Firebase MCP 同樣能用自然語言完成 |
-| 「必須透過 REST API + curl 查 Firestore」 | ❌ 不用，MCP 直接查 |
+> 完整場景對照、Firebase vs Supabase 決策辯論詳述 → 看創作庫 `Claude基本功EP09.5 - Firebase串接免費資料庫.md`
 
 ## 進度與最近更動紀錄
 
@@ -193,29 +158,8 @@ Claude基本功 EP09 / EP09.5 / EP11 / EP12 的實作工作目錄：
 | EP11 | 一人一碼教學駕駛艙（Firebase 版）| 在另一個 repo `mathruffian-dot/math-cockpit`：`2-2-linear-equation-graph/index.html`（改造）、`qr-generator.html`、`teacher-dashboard.html`；本 repo 只負責 `firestore.rules` 對應段落 |
 | EP12 | 本地 AI 與免費 API（Ollama/Groq/Gemini） | `math-homework.html` |
 
-## 彩排筆記（懶人包更新用）
-
-以下是這次彩排發現需要更新懶人包的地方：
-
-1. **MCP 安裝方式改變**：不再用 `--supabase-url` + `--supabase-service-role-key`，改用 Personal Access Token（`--access-token`）
-2. **Supabase API Keys 介面改版**：不再叫 `anon key` / `service_role key`，改成 `Publishable key` / `Secret key`
-3. **需要額外步驟**：到 Account → Tokens 產生 PAT
-4. **GitHub Pages 需要公開 repo**：免費方案不支援私有 repo
-5. **Google Auth 改為選配**：老師端改用 Claude + MCP 直接查資料，不需要登入機制
-6. **RLS 可以每張表各自設定**：不同表可以有不同權限規則
-7. **supabase-js 變數名不能叫 `supabase`**：會跟 `window.supabase` 衝突，要改名（如 `db`）
-
-## EP09.5 Firebase 彩排重點
-
-1. **Firebase MCP 完整支援 Firestore CRUD**：`firestore_list_collections` / `firestore_query_collection` / `firestore_get_document` / `firestore_add_document` / `firestore_update_document` / `firestore_delete_document` / `firestore_list_documents` 都有，跟 Supabase MCP 體驗一致。也包含 auth、messaging、storage、remoteconfig 等管理工具。
-2. **登入方式**：Firebase CLI 必須在互動式終端執行 `firebase login`，無法在 Claude Code 對話中完成，要請使用者打開 cmd
-3. **Firebase Config 全部可以公開**：apiKey、projectId 設計給前端使用，不算敏感資訊
-4. **Firestore 規則建議白名單模式**：建立資料庫時選「正式版模式」而非「測試模式」（避免 30 天過期），立即設定白名單規則
-5. **`onSnapshot` 是 Firebase 的殺手鐧**：即時更新比 Supabase Realtime 設定更簡單
-6. **老師查資料**：對 Claude 自然語言說「查 wordcloud_words 有幾筆、列出最熱門的 5 個關鍵字」，Claude 會直接呼叫 `firestore_query_collection` 撈資料整理回報，跟 Supabase 體驗一樣直接。
-7. **`firestore_query_collection` 的 `collection_path` 不要含尾巴 `/`**：寫成 `quiz_responses` 而非 `quiz_responses/`，否則會報「Collection id is invalid because it contains /」。
-
-> ⚠️ 修正紀錄（2026-04-14）：第 1 與第 6 點原本寫「Firebase MCP 無法直接讀寫 Firestore」是錯的——當時誤以為 MCP 只做專案管理。EP11 MVP 實作過程已完整驗證 Firebase MCP 的 Firestore CRUD 工具全部能用。
+> 📌 **彩排筆記與 EP09.5 Firebase 彩排重點兩段已歸檔**（2026-04-19 瘦身）：
+> 內容已內化進對應的創作庫腳本（EP09 / EP09.5）+ 駕駛艙踩坑筆記（`2026database/專案工作流程.md` 「🕳️ 踩坑筆記」段第 1-16 條）+ 三份 EP10 配套。在本檔重複保留會稀釋藍圖密度。
 
 ## 三處同步指引
 
