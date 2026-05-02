@@ -5,6 +5,8 @@
 > **進度、最近更動、下一步、踩坑筆記** 全部維護在 Obsidian：
 > `2026database/專案工作流程.md`（vault 根的同名資料夾）
 >
+> Obsidian vault：`C:\Users\小政\2nd BRAIN`
+>
 > 透過 `mcp__obsidian__read_note` 讀取，路徑：`2026database/專案工作流程.md`
 >
 > 本檔（`AGENTS.md`）只負責**藍圖**：架構決策、技術細節、檔案對應、Do/Don't。
@@ -66,12 +68,12 @@ Codex基本功 EP09 / EP09.5 / EP11 / EP12 的實作工作目錄：
 
 ## Firebase 專案資訊
 
-### my-teaching-tools（Firebase 文字雲，EP09.5）
-- 專案 ID：`my-teaching-tools`
+### teacherstudy（Firebase 文字雲與班級互動工具，EP09.5 / EP12）
+- 專案 ID：`teacherstudy-109ef`
 - Region：`asia-east1` (Taiwan)
 - 集合：`wordcloud_words`（word, created_at）
 - Security Rules：白名單模式，wordcloud_words 公開可讀寫，其他禁止
-- Web App：`1:257256401647:web:9db61fe50e7f22274cc91a`
+- Firebase 設定：`.firebaserc` 的 default project 與前端 `firebaseConfig.projectId` 皆使用 `teacherstudy-109ef`
 - 網頁：https://mathruffian-dot.github.io/2026database/wordcloud-firebase.html
 
 ## 架構決策（彩排後確定）
@@ -167,8 +169,9 @@ Codex基本功 EP09 / EP09.5 / EP11 / EP12 的實作工作目錄：
 
 | 平台 | 路徑 / 位置 | 用途 |
 |------|-------------|------|
-| Google Drive | `G:\我的雲端硬碟\2026database\` | 主要工作目錄，Codex 直接讀寫 |
-| Obsidian | `2026database/` | 第二大腦，佐證素材與草稿撰寫 |
+| Google Drive | `G:\我的雲端硬碟\2026database\` | 主要工作目錄，跨裝置同步 |
+| 本機工作副本 | `C:\Users\小政\2026database\` | 目前 Codex 可讀寫的 Git 工作目錄 |
+| Obsidian | `C:\Users\小政\2nd BRAIN` + `2026database/專案工作流程.md` | 第二大腦，進度、下一步、踩坑與收工紀錄 |
 | GitHub | `mathruffian-dot/2026database` | 版本控制與備份（公開 repo） |
 
 ## 工作注意事項
